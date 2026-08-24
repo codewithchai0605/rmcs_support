@@ -61,11 +61,20 @@ export default function SupportCard({ initialUsed, limit, zoneId }: Props) {
   return (
     <>
       <button className="support-btn" onClick={handleClick} disabled={isPending || limitReached}>
-        ❤️ Support (Watch an Ad)
+        {isPending ? (
+          <>
+            <span className="spinner"></span>
+            Loading...
+          </>
+        ) : (
+          <>❤️ Support (Watch an Ad)</>
+        )}
       </button>
 
-      <div className="counter">
-        <strong>{used}</strong> / {limit} ads watched today
+      <div className="counter-container">
+        <div className="counter">
+          <strong>{used}</strong> / {limit} ads watched today
+        </div>
       </div>
 
       {message && <div className={`message ${message.kind}`}>{message.text}</div>}

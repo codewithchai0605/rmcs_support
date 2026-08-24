@@ -25,12 +25,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
     >
       <Head>
         <script src="https://telegram.org/js/telegram-web-app.js?63"></script>
       </Head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body>{children}</body>
       {sdkUrl && (
         <Script
           src={sdkUrl}
