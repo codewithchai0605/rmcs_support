@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@types/bun": "^1.4.0",
     "mongoose": "^9.9.3",
     "next": "16.3.2",
     "react": "19.2.8",
@@ -21,7 +22,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
-    "typescript": "^5"
+    "typescript": "7"
   },
   "packageManager": "bun@1.4.0",
   "ignoreScripts": [

@@ -52,9 +52,35 @@ MongoDB.
   `subZoneId`, `requestVar`. Indexed uniquely on `(ymid, eventType)` — a
   single ad can produce both an impression and a click postback for the same
   `ymid`, and deduping on `ymid` alone would silently drop the second one.
+- **AppVersion** (`lib/models/AppVersion.ts`) — a *singleton* document
+  (fixed `_id: "latest"`, always upserted rather than inserted fresh) with
+  `version`, `buildNumber`, `apkUrl`, `fileSizeBytes`, `releaseNotes`. This
+  is what `/download` reads and what `scripts/cli.ts upload` writes.
 
 Nothing here pays the *user* — it just tracks daily ad views and records
 what Monetag reports back for your own records.
+
+## Download page & release CLI
+
+`/download` is a Server Component that reads the `AppVersion` singleton on
+every request (`export const dynamic = "force-dynamic"`, so a new release
+shows up immediately without a redeploy) and renders a download button,
+version/build/size/updated-date chips, install steps, and a thank-you note.
+It shows a "not published yet" state if `AppVersion` has no document.
+
+To publish a release, build the APK and run the CLI — see
+[`scripts/README.md`](scripts/README.md) for full usage:
+
+```bash
+bun scripts/cli.ts upload --version 1.4.2 --build 42
+```
+
+The CLI uploads the APK to Cloudflare R2 with **Bun's native `S3Client`**
+(`bun` package, `import { S3Client } from "bun"` — no `aws-sdk` dependency)
+and then upserts the `AppVersion` document with the resulting public URL.
+It needs one more env var beyond what's already in `.env`:
+`R2_PUBLIC_BASE_URL` (R2 has no default public URL — see the comment above
+it in `.env`).
 
 ## Known limitation (by design, for simplicity)
 

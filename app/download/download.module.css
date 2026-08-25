@@ -1,0 +1,194 @@
+/* ==========================================================================
+   Download page — elements unique to "get the APK" live here; everything
+   else (.page, .card, .section, .hero, role cards) comes from globals.css
+   so this route reads as the same app, not a bolted-on screen.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------- */
+/* Download button                                                        */
+/* ---------------------------------------------------------------------- */
+
+.downloadBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 20px;
+  font-family: var(--font-body), sans-serif;
+  color: var(--ink-inverse);
+  text-decoration: none;
+  background: var(--brand);
+  border: 1px solid var(--brand-strong);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  min-height: 64px;
+  box-shadow: var(--shadow-sm);
+}
+
+.downloadBtn:hover {
+  background: var(--brand-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.downloadBtn:active {
+  transform: translateY(0);
+}
+
+.downloadBtn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+.downloadIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.downloadIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.downloadText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  line-height: 1.25;
+}
+
+.downloadText strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.downloadText span {
+  font-size: 12.5px;
+  font-weight: 500;
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Meta grid (version / build / size / updated)                           */
+/* ---------------------------------------------------------------------- */
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.metaChip {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.metaLabel {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.metaValue {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Release-notes text (preserves the line breaks admins type in)          */
+/* ---------------------------------------------------------------------- */
+
+.preLine {
+  white-space: pre-line;
+}
+
+/* ---------------------------------------------------------------------- */
+/* FAQ                                                                     */
+/* ---------------------------------------------------------------------- */
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+}
+
+.faqItem {
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.faqItem:first-child {
+  border-top: none;
+  padding-top: 2px;
+}
+
+.faqQ {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Thank-you footer line                                                  */
+/* ---------------------------------------------------------------------- */
+
+.thankYou {
+  margin: 4px 4px 0;
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.thankYou a {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--brand-tint);
+  text-underline-offset: 2px;
+}
+
+.thankYou a:hover {
+  text-decoration-color: var(--brand);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Mobile                                                                   */
+/* ---------------------------------------------------------------------- */
+
+@media (max-width: 560px) {
+  .metaGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .downloadText strong {
+    font-size: 15px;
+  }
+}
