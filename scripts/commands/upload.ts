@@ -76,7 +76,7 @@ export async function cmdUpload(args: string[]) {
       // re-upload without --notes doesn't wipe out notes set earlier.
       ...(values.notes !== undefined ? { releaseNotes: values.notes } : {})
     },
-    { upsert: true, new: true, runValidators: true }
+    { upsert: true, returnDocument: 'after', runValidators: true }
   ).lean();
 
   console.log("\n✅ Published:");

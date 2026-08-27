@@ -8,6 +8,7 @@
 //   bun scripts/cli.ts show
 //   bun scripts/cli.ts list
 //   bun scripts/cli.ts delete <r2-key>
+//   bun scripts/cli.ts delete-old [--dry-run]
 //
 // Requires these variables in .env (see .env for the R2/Mongo ones already
 // there, and README.md for what to add):
@@ -18,6 +19,7 @@ import { cmdUpload } from "./commands/upload";
 import { cmdShow } from "./commands/show";
 import { cmdList } from "./commands/list";
 import { cmdDelete } from "./commands/delete";
+import { cmdDeleteOld } from "./commands/delete-old";
 
 function printHelp() {
   console.log(`App-version CLI
@@ -27,12 +29,14 @@ Usage:
   bun scripts/cli.ts show
   bun scripts/cli.ts list
   bun scripts/cli.ts delete <r2-key>
+  bun scripts/cli.ts delete-old [--dry-run]
 
 Commands:
   upload   Upload an APK to R2 and publish it as the current version
   show     Print the version currently published on the download page
   list     List APKs sitting in the R2 bucket's apks/ prefix
   delete   Remove one APK object from R2 (does not touch the DB record)
+  delete-old  Delete every APK except the latest one (does not touch the DB record)
 `);
 }
 
@@ -51,6 +55,9 @@ async function main() {
       break;
     case "delete":
       await cmdDelete(rest);
+      break;
+    case "delete-old":
+      await cmdDeleteOld(rest);
       break;
     case undefined:
     case "help":

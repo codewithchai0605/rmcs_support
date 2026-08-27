@@ -38,6 +38,12 @@ bun scripts/cli.ts list
 
 # Remove an old APK from R2 (does not touch the published version record)
 bun scripts/cli.ts delete apks/app-v1.4.1-build41.apk
+
+# Delete every APK except the most recently modified one
+bun scripts/cli.ts delete-old
+
+# Preview the cleanup without deleting anything
+bun scripts/cli.ts delete-old --dry-run
 ```
 
 Or via the package.json script, forwarding args the same way:
@@ -50,8 +56,8 @@ bun run cli upload --version 1.4.2 --build 42
 
 - **Every upload gets its own key** (`apks/app-v{version}-build{buildNumber}.apk`)
   rather than overwriting a single `latest.apk`. Old builds stay in the
-  bucket as a rollback trail — `delete` is there for when you want to
-  clean them up.
+  bucket as a rollback trail — `delete` removes one object, while
+  `delete-old` keeps the most recently modified APK and removes the rest.
 - **The published version is a single upserted document**, not a new row
   per release (per the original ask) — see `APP_VERSION_ID` in
   `lib/models/AppVersion.ts`. `show` and the download page both just read
